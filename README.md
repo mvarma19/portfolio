@@ -1,70 +1,204 @@
-# Getting Started with Create React App
+# Instructions
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to Ramp's frontend interview challenge.
 
-## Available Scripts
+In this challenge, you will need to fix certain bugs within the starter code provided to you.
 
-In the project directory, you can run:
+The bugs **do not depend on each other**, so you can solve them independently.
 
-### `npm start`
+You will submit a CodeSandbox link with your response.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Prerequisites
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- `node`
+- `npm` or `yarn`
+- [CodeSandbox](https://codesandbox.io)
 
-### `npm test`
+### Coding
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Since you need to submit a CodeSandbox link with your response (_See [Submission](#submission)_), we recommend that you create the CodeSandbox first, solve the bugs in your generated CodeSandbox, and then share the link with us. _You can also work locally first, and upload at the end._
 
-### `npm run build`
+#### Upload the project to CodeSandbox
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**NOTE: Make sure your CodeSandbox link can be edited. If your link is Read only, you will be disqualified as we are not able to grade your assignment. We strongly recommend you use this method to upload your project (with the CLI) rather than importing directly from Github to generate a CodeSandbox, as it makes it Read only by default.**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Run `yarn install` or `npm install`
+- Run `yarn upload` or `npm run upload`
+- If this is the first time using CodeSandbox CLI, it will ask you to log in with Github first
+- You might be prompted: **We will upload XXX static files to your CodeSandbox upload storage** and then a list of files (typically `DS_Store` or `desktop.ini` files). It's fine if you upload with these, or you can manually remove them before uploading.
+- Confirm that you want to proceed with deployment
+- Once it finishes, you will get the link for your CodeSandbox. Also, you can log in to the website with your Github account and see your projects to retrieve the link.
+- Start working directly on the CodeSandbox
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+_Reference: https://codesandbox.io/docs/importing#import-local-projects-via-cli_
 
-### `npm run eject`
+Or
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### Run the server locally
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Run `yarn install` or `npm install`
+- Run `yarn start`
+- The server will be available in `http://localhost:3000`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Special considerations
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+#### Typescript
 
-## Learn More
+At Ramp, we use React + Typescript in our codebase.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+You are not required to know Typescript and using it in this challenge is optional. We have abstracted most of the Typescript code into its own files (_types.ts_), so feel free to ignore those. All of the bugs can be solved without Typescript.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+If you work on the CodeSandbox, you can ignore any warnings on the code as long it works in the browser. However, feel free to write any Typescript code if your feel comfortable.
 
-### Code Splitting
+If you work locally, `TSC_COMPLE_ON_ERROR` flag is set to `true` by default. However, if you feel comfortable with Typescript, feel free to remove it on `.env` and to write any Typescript code.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+#### API
 
-### Analyzing the Bundle Size
+We don't have a real API for this challenge, so we added some utilities to simulate API requests. To help you debug, we `console.log` the status of the ongoing simulated requests. You will not be able to see these requests in the network tab of your browser.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+#### Solution
 
-### Making a Progressive Web App
+- Solutions can be HTML, CSS or Javascript oriented, depending on the bug and your solution.
+- Modify any file inside the `src` folder as long as the expected result is correct.
+- The goal is to solve the bug as expected. Finding a clean and efficient solution is a nice to have, but not required.
+- Except for the last one, the first bugs don't depend on each other and can be solved in any order.
+  - We recommend reading all the descriptions first. You might find the solution to one bug while trying to fix another.
+  - The last bug will need other bugs to be fixed first in order to be reproduced.
+- You cannot add any external dependency to the project. The bugs can be solved with vanilla HTML, CSS and Javascript.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+# Bug 1: Select dropdown doesn't scroll with rest of the page
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+**How to reproduce:**
 
-### Deployment
+1. Make your viewport smaller in height. Small enough to have a scroll bar
+2. Click on the **Filter by employee** select to open the options dropdown
+3. Scroll down the page
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+**Expected:** Options dropdown moves with its parent input as you scroll the page
 
-### `npm run build` fails to minify
+**Actual:** Options dropdown stays in the same position as you scroll the page, losing the reference to the select input
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# Bug 2: Approve checkbox not working
+
+**How to reproduce:**
+
+1. Click on the checkbox on the right of any transaction
+
+**Expected:** Clicking the checkbox toggles its value
+
+**Actual:** Nothing happens
+
+# Bug 3: Cannot select _All Employees_ after selecting an employee
+
+**How to reproduce:**
+
+1. Click on the **Filter by employee** select to open the options dropdown
+2. Select an employee from the list
+3. Click on the **Filter by employee** select to open the options dropdown
+4. Select **All Employees** option
+
+**Expected:** All transactions are loaded
+
+**Actual:** The page crashes
+
+# Bug 4: Clicking on View More button not showing correct data
+
+**How to reproduce:**
+
+1. Click on the **View more** button
+2. Wait until the new data loads
+
+**Expected:** Initial transactions plus new transactions are shown on the page
+
+**Actual:** New transactions replace initial transactions, losing initial transactions
+
+# Bug 5: Employees filter not available during loading more data
+
+_This bug has 2 wrong behaviors that will be fixed with the same solution_
+
+##### Part 1
+
+**How to reproduce:**
+
+1. Open devtools to watch the simulated network requests in the console
+2. Refresh the page
+3. Quickly click on the **Filter by employee** select to open the options dropdown
+
+**Expected:** The filter should stop showing "Loading employees.." as soon as the request for `employees` is succeeded
+
+**Actual:** The filter stops showing "Loading employees.." until `paginatedTransactions` is succeeded
+
+##### Part 2
+
+**How to reproduce:**
+
+1. Open devtools to watch the simulated network requests in the console
+2. Click on **View more** button
+3. Quickly click on the **Filter by employee** select to open the options dropdown
+
+**Expected:** The employees filter should not show "Loading employees..." after clicking **View more**, as employees are already loaded
+
+**Actual:** The employees filter shows "Loading employees..." after clicking **View more** until new transactions are loaded.
+
+# Bug 6: View more button not working as expected
+
+_This bug has 2 wrong behaviors that can be fixed with the same solution. It's acceptable to fix with separate solutions as well._
+
+##### Part 1
+
+**How to reproduce:**
+
+1. Click on the **Filter by employee** select to open the options dropdown
+2. Select an employee from the list
+3. Wait until transactions load
+
+**Expected:** The **View more** button is not be visible when transactions are filtered by user, because that is not a paginated request.
+
+**Actual:** The **View more** button is visible even when transactions are filtered by employee. _You can even click **View more** button and get an unexpected result_
+
+##### Part 2
+
+**How to reproduce:**
+
+1. Click on **View more** button
+2. Wait until it loads more data
+3. Repeat these steps as many times as you can
+
+**Expected:** When you reach the end of the data, the **View More** button disappears and you are not able to request more data.
+
+**Actual:** When you reach the end of the data, the **View More** button is still showing and you are still able to click the button. If you click it, the page crashes.
+
+# Bug 7: Approving a transaction won't persist the new value
+
+_You need to fix some of the previous bugs in order to reproduce_
+
+**How to reproduce:**
+
+1. Click on the **Filter by employee** select to open the options dropdown
+2. Select an employee from the list _(E.g. James Smith)_
+3. Toggle the first transaction _(E.g. Uncheck Social Media Ads Inc)_
+4. Click on the **Filter by employee** select to open the options dropdown
+5. Select **All Employees** option
+6. Verify values
+7. Click on the **Filter by employee** select to open the options dropdown
+8. Verify values
+
+**Expected:** In steps 6 and 8, toggled transaction kept the same value it was given in step 2 _(E.g. Social Media Ads Inc is unchecked)_
+
+**Actual:** In steps 6 and 8, toggled transaction lost the value given in step 2. _(E.g. Social Media Ads Inc is checked again)_
+
+## Submission
+
+**IMPORTANT:** Before sharing your CodeSandbox, open the `email.txt` file and replace your email on the only line of the file. Don't use any prefix or suffix, just your email.
+
+You will submit a link to a CodeSandbox with your responses. Make sure your CodeSandbox is not Read only and can be edited, otherwise you will be disqualified. _See [Coding](#coding)_
+
+---
+
+### Callouts
+
+- Don't remove existing `data-testid` tags. Otherwise, your results will be invalidated.
+- Other than the bugs, don't modify anything that will have a different outcome. Otherwise, your results might be invalidated.
+- Plagiarism is a serious offense and will result in disqualification from further consideration.
